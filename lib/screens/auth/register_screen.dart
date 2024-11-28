@@ -1,4 +1,4 @@
-import 'package:bdcalling_it/screens/auth/bloc/register_bloc.dart';
+import 'package:bdcalling_it/screens/auth/regi_bloc/register_bloc.dart';
 import 'package:bdcalling_it/services/auth_service.dart';
 import 'package:bdcalling_it/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,37 @@
+import 'package:bdcalling_it/core/routes/route_names.dart';
+import 'package:bdcalling_it/core/dependency_injector.dart';
+import 'package:bdcalling_it/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
+  void initState() {
+    handleAuthCheck();
+    super.initState();
+  }
+
+  void handleAuthCheck() async {
+    final AuthService authService = sl<AuthService>();
+    final authToken = await authService.getToken();
+    await Future.delayed(const Duration(seconds: 1));
+    if (authToken != null) {
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, RouteNames.tasklist);
+      }
+    } else {
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, RouteNames.login);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
