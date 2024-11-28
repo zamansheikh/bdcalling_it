@@ -64,6 +64,25 @@ class LoginScreen extends StatelessWidget {
                           },
                           child: const Text('Login'),
                         ),
+                      const SizedBox(height: 16),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, RouteNames.register);
+                        },
+                        child: RichText(
+                            text: const TextSpan(
+                          text: 'Don\'t have an account? ',
+                          children: [
+                            TextSpan(
+                              text: 'Register',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                          ],
+                        )),
+                      ),
                     ],
                   ),
                 ),
