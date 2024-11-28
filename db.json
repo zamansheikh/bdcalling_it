@@ -1,0 +1,741 @@
+{
+	"info": {
+		"_postman_id": "5964fbaa-c91a-47c2-93c5-9e19ba4d5736",
+		"name": "Task Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38089143",
+		"_collection_link": "https://solution-squad-thakur.postman.co/workspace/Team-Workspace~1269aeea-67e8-4bc9-84f5-fc6db03062a7/collection/38089143-5964fbaa-c91a-47c2-93c5-9e19ba4d5736?action=share&source=collection_link&creator=38089143"
+	},
+	"item": [
+		{
+			"name": "Auth -(user, admin)",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstName",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Doe",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "thakursaad613@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "1234 Elm Street, Springfield, IL",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/BdCalling/Downloads/sukuna-dope-amoled-5120x2880-16950.jpeg"
+								}
+							]
+						},
+						"url": "{{live}}/user/register"
+					},
+					"response": []
+				},
+				{
+					"name": "activate-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"thakursaad613@gmail.com\",\r\n    \"code\": \"497847\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{live}}/user/activate-user"
+					},
+					"response": [
+						{
+							"name": "activate-account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"thakursaad61@gmail.com\",\r\n    \"code\": \"691765\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{live}}/user/activate-user"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-ukQPl+D9ZnmgBqmdyKFjXnzPRK8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Nov 2024 11:45:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Account activated\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login *",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"thakursaad613@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{live}}/user/login"
+					},
+					"response": [
+						{
+							"name": "login *",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"thakursaad61@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{live}}/user/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "622"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26e-mgSjwHHc+DPheurjjwc0F78JBEk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Nov 2024 11:48:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Successfully logged in\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"67445eaf2fd4bc03089bacbe\",\n            \"firstName\": \"John\",\n            \"lastName\": \"Doe\",\n            \"email\": \"thakursaad61@gmail.com\",\n            \"address\": \"1234 Elm Street, Springfield, IL\",\n            \"image\": \"dope-sukuna-pink-5120x2880-16935.png\",\n            \"activationCode\": 691765,\n            \"isVerified\": true,\n            \"createdAt\": \"2024-11-25T11:25:35.909Z\",\n            \"updatedAt\": \"2024-11-25T11:45:18.222Z\",\n            \"__v\": 0\n        },\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzQ0NWVhZjJmZDRiYzAzMDg5YmFjYmUiLCJlbWFpbCI6InRoYWt1cnNhYWQ2MUBnbWFpbC5jb20iLCJpYXQiOjE3MzI1MzUyODIsImV4cCI6MTczMjYyMTY4Mn0.M6OgsrJK7PbzuLka76b8anKz1pcnM4G2yKxQjAmHhtY\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update-profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{user-token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstName",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Doe",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "address",
+									"value": "1234 Elm Street, Springfield, IL",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": "{{live}}/user/update-profile"
+					},
+					"response": [
+						{
+							"name": "edit-profile *",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{USER_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "firstName",
+											"value": "John",
+											"type": "text"
+										},
+										{
+											"key": "lastName",
+											"value": "Doe",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "address",
+											"value": "1234 Elm Street, Springfield, IL",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": "{{live}}/user/update-profile"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "410"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19a-/4quRgqK6VmoDYocHI4qwPuX3y4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Nov 2024 11:55:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Profile update successful\",\n    \"data\": {\n        \"_id\": \"67445eaf2fd4bc03089bacbe\",\n        \"firstName\": \"John\",\n        \"lastName\": \"Doe\",\n        \"email\": \"thakursaad613@gmail.com\",\n        \"password\": \"123456\",\n        \"address\": \"1234 Elm Street, Springfield, IL\",\n        \"image\": \"dope-sukuna-pink-5120x2880-16935.png\",\n        \"activationCode\": 691765,\n        \"isVerified\": true,\n        \"createdAt\": \"2024-11-25T11:25:35.909Z\",\n        \"updatedAt\": \"2024-11-25T11:55:59.860Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "my-profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{user-token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{USER_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{live}}/user/my-profile"
+					},
+					"response": [
+						{
+							"name": "profile *",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{USER_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": "{{live}}/user/my-profile"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "397"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"18d-Ra/KSU6UkVsk2MUROvIAfJoDG4A\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Nov 2024 11:48:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Found profile\",\n    \"data\": {\n        \"_id\": \"67445eaf2fd4bc03089bacbe\",\n        \"firstName\": \"John\",\n        \"lastName\": \"Doe\",\n        \"email\": \"thakursaad61@gmail.com\",\n        \"password\": \"123456\",\n        \"address\": \"1234 Elm Street, Springfield, IL\",\n        \"image\": \"dope-sukuna-pink-5120x2880-16935.png\",\n        \"activationCode\": 691765,\n        \"isVerified\": true,\n        \"createdAt\": \"2024-11-25T11:25:35.909Z\",\n        \"updatedAt\": \"2024-11-25T11:45:18.222Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "create-task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{user-token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \";alksdjf;laSKDjf\",\r\n    \"description\": \";alksdjf;laSKDjf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{live}}/task/create-task"
+					},
+					"response": [
+						{
+							"name": "create-task",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \";alksdjf;laSKDjf\",\r\n    \"description\": \";alksdjf;laSKDjf\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{live}}/task/create-task"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "286"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11e-SxFY3Eveula8mXyXKTtY6l5OlZA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Nov 2024 12:02:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Task created successful\",\n    \"data\": {\n        \"title\": \";alksdjf;laSKDjf\",\n        \"description\": \";alksdjf;laSKDjf\",\n        \"creator_email\": \"thakursaad613@gmail.com\",\n        \"_id\": \"6744675aaba11e4ae5f05cef\",\n        \"createdAt\": \"2024-11-25T12:02:34.561Z\",\n        \"updatedAt\": \"2024-11-25T12:02:34.561Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get-task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{user-token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{live}}/task/get-task/6744675aaba11e4ae5f05cef"
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{live}}/task/get-task/6744675aaba11e4ae5f05cef"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "273"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"111-nP9voGinqyrTU4AUFFpL7fgz+T4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Nov 2024 12:03:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Task found\",\n    \"data\": {\n        \"_id\": \"6744675aaba11e4ae5f05cef\",\n        \"title\": \";alksdjf;laSKDjf\",\n        \"description\": \";alksdjf;laSKDjf\",\n        \"creator_email\": \"thakursaad613@gmail.com\",\n        \"createdAt\": \"2024-11-25T12:02:34.561Z\",\n        \"updatedAt\": \"2024-11-25T12:02:34.561Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete-task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{user-token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{live}}/task/delete-task/6744675aaba11e4ae5f05cef"
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{live}}/task/get-task/6744675aaba11e4ae5f05cef"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "273"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"111-nP9voGinqyrTU4AUFFpL7fgz+T4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Nov 2024 12:03:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Task found\",\n    \"data\": {\n        \"_id\": \"6744675aaba11e4ae5f05cef\",\n        \"title\": \";alksdjf;laSKDjf\",\n        \"description\": \";alksdjf;laSKDjf\",\n        \"creator_email\": \"thakursaad613@gmail.com\",\n        \"createdAt\": \"2024-11-25T12:02:34.561Z\",\n        \"updatedAt\": \"2024-11-25T12:02:34.561Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get-all-task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{live}}/task/get-all-task"
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{live}}/task/get-all-task"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1195"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4ab-jHWYhdytfAzcU+QFEHnn3FXRXqI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 25 Nov 2024 12:05:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Success\",\n    \"message\": \"Your Tasks found\",\n    \"data\": {\n        \"count\": 5,\n        \"myTasks\": [\n            {\n                \"_id\": \"67446719a863e97a505db1ad\",\n                \"title\": \";alksdjf;laSKDjf\",\n                \"description\": \";alksdjf;laSKDjf\",\n                \"creator_email\": \"thakursaad613@gmail.com\",\n                \"createdAt\": \"2024-11-25T12:01:29.501Z\",\n                \"updatedAt\": \"2024-11-25T12:01:29.501Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"6744671ba863e97a505db1af\",\n                \"title\": \";alksdjf;laSKDjf\",\n                \"description\": \";alksdjf;laSKDjf\",\n                \"creator_email\": \"thakursaad613@gmail.com\",\n                \"createdAt\": \"2024-11-25T12:01:31.507Z\",\n                \"updatedAt\": \"2024-11-25T12:01:31.507Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"6744671ca863e97a505db1b1\",\n                \"title\": \";alksdjf;laSKDjf\",\n                \"description\": \";alksdjf;laSKDjf\",\n                \"creator_email\": \"thakursaad613@gmail.com\",\n                \"createdAt\": \"2024-11-25T12:01:32.105Z\",\n                \"updatedAt\": \"2024-11-25T12:01:32.105Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"6744671ca863e97a505db1b3\",\n                \"title\": \";alksdjf;laSKDjf\",\n                \"description\": \";alksdjf;laSKDjf\",\n                \"creator_email\": \"thakursaad613@gmail.com\",\n                \"createdAt\": \"2024-11-25T12:01:32.617Z\",\n                \"updatedAt\": \"2024-11-25T12:01:32.617Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"6744675aaba11e4ae5f05cef\",\n                \"title\": \";alksdjf;laSKDjf\",\n                \"description\": \";alksdjf;laSKDjf\",\n                \"creator_email\": \"thakursaad613@gmail.com\",\n                \"createdAt\": \"2024-11-25T12:02:34.561Z\",\n                \"updatedAt\": \"2024-11-25T12:02:34.561Z\",\n                \"__v\": 0\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "live",
+			"value": "http://139.59.65.225:8052",
+			"type": "string"
+		},
+		{
+			"value": "http://139.59.65.225:8052",
+			"type": "string"
+		},
+		{
+			"key": "user-token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzQ0NWVhZjJmZDRiYzAzMDg5YmFjYmUiLCJlbWFpbCI6InRoYWt1cnNhYWQ2MUBnbWFpbC5jb20iLCJpYXQiOjE3MzI1MzUyODIsImV4cCI6MTczMjYyMTY4Mn0.M6OgsrJK7PbzuLka76b8anKz1pcnM4G2yKxQjAmHhtY",
+			"type": "string"
+		},
+		{
+			"key": "admin-token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
