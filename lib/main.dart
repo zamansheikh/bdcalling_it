@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         title: 'bdCalling IT Task',
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
-        initialRoute: RouteNames.bottomNav,
+        initialRoute: RouteNames.welcome,
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );

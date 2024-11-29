@@ -1,3 +1,4 @@
+import 'package:bdcalling_it/core/routes/route_names.dart';
 import 'package:bdcalling_it/screens/auth/auth_bloc/auth_bloc.dart';
 import 'package:bdcalling_it/screens/task/task_bloc/task_bloc.dart';
 import 'package:bdcalling_it/screens/task/task_detail_screen.dart';
@@ -89,8 +90,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   trailing: IconButton(
                     icon: const Icon(Icons.delete, color: Colors.red),
                     onPressed: () async {
-                      // await _taskService.deleteTask(task.id, token!);
-                      _refreshTasks();
+                      context.read<TaskBloc>().add(TaskDelete(task));
                     },
                   ),
                 );
@@ -99,6 +99,12 @@ class _TaskListScreenState extends State<TaskListScreen> {
           }
           return const SizedBox();
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, RouteNames.createTask);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

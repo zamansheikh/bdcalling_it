@@ -28,8 +28,6 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
       email: widget.email,
       code: _otpController.text,
     );
-    print(response);
-
     setState(() {
       _isLoading = false;
     });

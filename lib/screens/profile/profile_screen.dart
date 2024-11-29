@@ -1,5 +1,6 @@
 import 'package:bdcalling_it/core/routes/route_names.dart';
 import 'package:bdcalling_it/screens/profile/profile_bloc/profile_bloc.dart';
+import 'package:bdcalling_it/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,12 +29,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.edit,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, RouteNames.editProfile);
+          BlocBuilder<ProfileBloc, ProfileState>(
+            builder: (context, state) {
+              return IconButton(
+                icon: const Icon(
+                  Icons.edit,
+                ),
+                onPressed: () {
+                  if (state is ProfileLoaded) {
+                    Navigator.pushNamed(context, RouteNames.editProfile,
+                        arguments: state.user);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Profile not loaded yet'),
+                      ),
+                    );
+                  }
+                },
+              );
             },
           ),
         ],
@@ -70,7 +84,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: CircleAvatar(
                               radius: 60,
                               backgroundImage: user.image != null
-                                  ? NetworkImage(user.image!)
+                                  ? NetworkImage(
+                                      '${ApiService.baseUrl}/${user.image}')
                                   : null,
                               child: user.image == null
                                   ? const Icon(Icons.person,

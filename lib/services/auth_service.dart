@@ -46,11 +46,14 @@ class AuthService {
       if (response['status'] == 'Success') {
         // Store token and user info
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('user_token', response['data']['token']);
-        await prefs.setString('user_email', response['data']['user']);
+        await prefs.setString(
+            'user_token', json.encode(response['data']['token']));
+        await prefs.setString(
+            'user_email', json.encode(response['data']['user']));
+        return response;
+      } else {
+        throw Exception(response['error']);
       }
-
-      return response;
     } catch (e) {
       return {
         'status': 'Error',
@@ -82,31 +85,37 @@ class AuthService {
   }
 
   Future<UserModel?> getUser(String token) async {
+    token = token.replaceAll('"', '');
     final prefs = await SharedPreferences.getInstance();
     try {
-      Map<String, dynamic>
-          response; // = await _apiService.getUser(token: token);
-      final dummyProfileJson = """
-{
-    "status": "Success",
-    "message": "Found profile",
-    "data": {
-        "_id": "67445eaf2fd4bc03089bacbe",
-        "firstName": "John",
-        "lastName": "Doe",
-        "email": "thakursaad61@gmail.com",
-        "password": "123456",
-        "address": "1234 Elm Street, Springfield, IL",
-        "image": "dope-sukuna-pink-5120x2880-16935.png",
-        "activationCode": 691765,
-        "isVerified": true,
-        "createdAt": "2024-11-25T11:25:35.909Z",
-        "updatedAt": "2024-11-25T11:45:18.222Z",
-        "__v": 0
+      final response = await _apiService.getUser(token: token);
+      // Store user data as JSON string
+      await prefs.setString('user_email', json.encode(response['data']));
+      return UserModel.fromJson(response['data']);
+    } catch (e) {
+      return null;
     }
-}""";
-      response = jsonDecode(dummyProfileJson);
-      prefs.setString('user_email', response['data']['email']);
+  }
+
+  Future<UserModel?> updateProfile(UserModel user, File? profileImage) async {
+    try {
+      var token = await getToken();
+      if (token == null) {
+        return null;
+      }
+      token = token.replaceAll('"', '');
+      token = token.replaceAll('"', '');
+      final response = await _apiService.editProfile(
+        firstName: user.firstName,
+        lastName: user.lastName,
+        address: user.address,
+        token: token,
+        profileImage: profileImage,
+      );
+
+      final prefs = await SharedPreferences.getInstance();
+      // Store user data as JSON string
+      await prefs.setString('user_email', json.encode(response['data']));
       return UserModel.fromJson(response['data']);
     } catch (e) {
       return null;

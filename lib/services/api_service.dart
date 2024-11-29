@@ -5,7 +5,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://139.59.65.225:8052';
+  static const String baseUrl = 'http://206.189.138.45:8052';
 
   // Authentication Endpoints
   Future<Map<String, dynamic>> register({
@@ -57,14 +57,12 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>> getUser({required String token}) async {
-    final response = await http.post(
+    final response = await http.get(
       Uri.parse('$baseUrl/user/my-profile'),
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
       },
     );
-
     return json.decode(response.body);
   }
 
@@ -94,8 +92,8 @@ class ApiService {
     required String token,
     File? profileImage,
   }) async {
-    var request =
-        http.MultipartRequest('PATCH', Uri.parse('$baseUrl/user/update-profile'));
+    var request = http.MultipartRequest(
+        'PATCH', Uri.parse('$baseUrl/user/update-profile'));
 
     request.fields['firstName'] = firstName;
     request.fields['lastName'] = lastName;

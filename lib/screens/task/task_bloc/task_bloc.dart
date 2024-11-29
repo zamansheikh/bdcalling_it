@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:bdcalling_it/core/dependency_injector.dart';
 import 'package:bdcalling_it/models/task_model.dart';
 import 'package:bdcalling_it/services/auth_service.dart';
 import 'package:bdcalling_it/services/task_service.dart';
@@ -18,14 +21,45 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       (event, emit) async {
         emit(TaskLoading());
         try {
-          var token = await authService
-              .getToken(); //TODO: Add mail when API will be ready
-          token ??= "kdjfkdjfkdjfkd"; // dummpy token for check!
+          var token = await authService.getToken();
 
-          final tasks = await taskService.fetchAllTasks(token);
+          final tasks = await taskService.fetchAllTasks(
+            token!,
+          );
           emit(TaskLoaded(tasks));
         } catch (e) {
           emit(TaskError(e.toString()));
+        }
+      },
+    );
+    on<TaskDelete>(
+      (event, emit) async {
+        List<TaskModel> tasks = (state as TaskLoaded).tasks;
+        emit(TaskLoading());
+        try {
+          var token = await authService.getToken();
+          await taskService.deleteTask(event.task.id, json.decode(token!));
+          sl<TaskBloc>().add(FetchTask());
+        } catch (e) {
+          emit(TaskLoaded(tasks));
+        }
+      },
+    );
+    on<CreateTask>(
+      (event, emit) async {
+        List<TaskModel> tasks = (state as TaskLoaded).tasks;
+        emit(TaskLoading());
+        try {
+          var token = await authService.getToken();
+
+          await taskService.createTask(
+              event.title, event.description, json.decode(token!));
+
+          sl<TaskBloc>().add(FetchTask());
+        } catch (e) {
+          emit(TaskError(e.toString()));
+          await Future.delayed(Duration(seconds: 2));
+          sl<TaskBloc>().add(FetchTask());
         }
       },
     );

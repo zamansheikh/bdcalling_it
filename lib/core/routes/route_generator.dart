@@ -1,4 +1,5 @@
 import 'package:bdcalling_it/core/routes/route_names.dart';
+import 'package:bdcalling_it/models/user_model.dart';
 import 'package:bdcalling_it/screens/auth/login_screen.dart';
 import 'package:bdcalling_it/screens/auth/register_screen.dart';
 import 'package:bdcalling_it/screens/auth/verification_screen.dart';
@@ -6,6 +7,7 @@ import 'package:bdcalling_it/screens/profile/edit_profile_screen.dart';
 import 'package:bdcalling_it/screens/profile/profile_screen.dart';
 import 'package:bdcalling_it/screens/splash/welcome_screen.dart';
 import 'package:bdcalling_it/screens/task/bottom_nav_screen.dart';
+import 'package:bdcalling_it/screens/task/create_task_screen.dart';
 import 'package:bdcalling_it/screens/task/task_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,11 +29,16 @@ class RouteGenerator {
                 OTPVerificationPage(email: settings.arguments as String));
 
       case RouteNames.editProfile:
-        return MaterialPageRoute(builder: (_) => EditProfileScreen());
+        return MaterialPageRoute(
+            builder: (_) => EditProfileScreen(
+                  user: settings.arguments as UserModel,
+                ));
       case RouteNames.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case RouteNames.bottomNav:
         return MaterialPageRoute(builder: (_) => BottomNavScreen());
+      case RouteNames.createTask:
+        return MaterialPageRoute(builder: (_) => CreateTaskScreen());
       default:
         return MaterialPageRoute(builder: (_) => Error404Screen());
     }

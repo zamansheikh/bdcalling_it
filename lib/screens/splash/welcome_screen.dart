@@ -35,10 +35,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
             );
-            Navigator.pushReplacementNamed(context, RouteNames.bottomNav);
+            Navigator.pushReplacementNamed(context, RouteNames.login);
           } else {
             Navigator.pushReplacementNamed(context,
-                RouteNames.bottomNav); //! TODO: Fix it leter when api is ready
+                RouteNames.login);
           }
         },
         builder: (context, state) {

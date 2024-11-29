@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bdcalling_it/models/user_model.dart';
@@ -44,6 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         if (response['status'] == 'Success') {
           final user = await authService.getUser(response["data"]['token']);
+          print(user);
           user != null
               ? emit(AuthAuthenticated(user))
               : emit(AuthError('User not found'));
@@ -67,9 +69,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading());
       try {
         final userToken = await authService.getToken();
+
         if (userToken != null) {
-          final user = await authService.getUser(userToken);
-          emit(AuthAuthenticated(user!)); //! TODO:
+          final user = await authService.getUser(json.decode(userToken));
+          emit(AuthAuthenticated(user!));
         } else {
           emit(AuthInitial());
         }

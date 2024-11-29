@@ -8,4 +8,5 @@ class RouteNames {
   static const String editProfile = '/edit-profile';
   static const String profile = '/profile';
   static const String bottomNav = '/bottom-nav';
+  static const String createTask = '/create-task';
 }
