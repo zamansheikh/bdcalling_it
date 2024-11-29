@@ -10,8 +10,9 @@ final sl = GetIt.instance; // Service locator
 
 Future<void> init() async {
   // Bloc
-  sl.registerFactory(() => AuthBloc(authService: sl()));
-  sl.registerFactory(() => TaskBloc(taskService: sl(), authService: sl()));
+  sl.registerLazySingleton(() => AuthBloc(authService: sl()));
+  sl.registerLazySingleton(
+      () => TaskBloc(taskService: sl(), authService: sl()));
 
   // Services
   sl.registerLazySingleton(() => AuthService());

@@ -43,7 +43,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           password: event.password,
         );
         if (response['status'] == 'Success') {
-          emit(AuthSuccess());
+          final user = await authService.getUser(response["data"]['token']);
+          user != null
+              ? emit(AuthAuthenticated(user))
+              : emit(AuthError('User not found'));
         } else {
           emit(AuthError(response['message']));
         }
@@ -66,7 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final userToken = await authService.getToken();
         if (userToken != null) {
           final user = await authService.getUser(userToken);
-          emit(AuthAuthenticated(user!)); //! TODO: 
+          emit(AuthAuthenticated(user!)); //! TODO:
         } else {
           emit(AuthInitial());
         }

@@ -1,7 +1,6 @@
 import 'package:bdcalling_it/core/routes/route_names.dart';
 import 'package:bdcalling_it/core/dependency_injector.dart';
 import 'package:bdcalling_it/screens/auth/auth_bloc/auth_bloc.dart';
-import 'package:bdcalling_it/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,19 +20,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void handleAuthCheck() async {
+    await Future.delayed(const Duration(seconds: 2));
     sl<AuthBloc>().add(AppStarted());
-    final AuthService authService = sl<AuthService>();
-    final authToken = await authService.getToken();
-    await Future.delayed(const Duration(seconds: 1));
-    if (authToken != null) {
-      if (mounted) {
-        Navigator.pushReplacementNamed(context, RouteNames.tasklist);
-      }
-    } else {
-      if (mounted) {
-        Navigator.pushReplacementNamed(context, RouteNames.login);
-      }
-    }
   }
 
   @override
@@ -41,7 +29,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is AuthAuthenticated) {
+            Navigator.pushReplacementNamed(context, RouteNames.tasklist);
+          } else if (state is AuthError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message)),
+            );
+            Navigator.pushReplacementNamed(context, RouteNames.login);
+          } else {
+            Navigator.pushReplacementNamed(context, RouteNames.login);
+          }
         },
         builder: (context, state) {
           return SafeArea(

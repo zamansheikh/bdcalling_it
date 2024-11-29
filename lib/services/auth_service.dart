@@ -46,7 +46,7 @@ class AuthService {
         // Store token and user info
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('user_token', response['data']['token']);
-        await prefs.setString('user_email', response['data']['user']['email']);
+        await prefs.setString('user_email', response['data']['user']);
       }
 
       return response;
