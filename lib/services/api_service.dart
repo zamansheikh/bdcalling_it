@@ -86,6 +86,36 @@ class ApiService {
     return json.decode(response.body);
   }
 
+  // Edit Profile Endpoint
+  Future<Map<String, dynamic>> editProfile({
+    required String firstName,
+    required String lastName,
+    required String address,
+    required String token,
+    File? profileImage,
+  }) async {
+    var request =
+        http.MultipartRequest('PATCH', Uri.parse('$baseUrl/user/update-profile'));
+
+    request.fields['firstName'] = firstName;
+    request.fields['lastName'] = lastName;
+    request.fields['address'] = address;
+
+    if (profileImage != null) {
+      var mimeType = lookupMimeType(profileImage.path);
+      var multipartFile = await http.MultipartFile.fromPath(
+          'file', profileImage.path,
+          contentType: MediaType.parse(mimeType ?? 'image/jpeg'));
+      request.files.add(multipartFile);
+    }
+
+    request.headers['Authorization'] = 'Bearer $token';
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    return json.decode(response.body);
+  }
+
   // Task Endpoints
   Future<Map<String, dynamic>> createTask({
     required String title,

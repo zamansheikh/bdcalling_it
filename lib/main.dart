@@ -2,6 +2,7 @@ import 'package:bdcalling_it/core/theme/app_theme.dart';
 import 'package:bdcalling_it/core/routes/route_names.dart';
 import 'package:bdcalling_it/core/routes/route_generator.dart';
 import 'package:bdcalling_it/screens/auth/auth_bloc/auth_bloc.dart';
+import 'package:bdcalling_it/screens/profile/profile_bloc/profile_bloc.dart';
 import 'package:bdcalling_it/screens/task/task_bloc/task_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,13 +28,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => di.sl<TaskBloc>(),
         ),
+        BlocProvider(create: (context) => di.sl<ProfileBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'bdCalling IT Task',
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
-        initialRoute: RouteNames.welcome,
+        initialRoute: RouteNames.bottomNav,
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );

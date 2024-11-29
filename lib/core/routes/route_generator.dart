@@ -2,7 +2,10 @@ import 'package:bdcalling_it/core/routes/route_names.dart';
 import 'package:bdcalling_it/screens/auth/login_screen.dart';
 import 'package:bdcalling_it/screens/auth/register_screen.dart';
 import 'package:bdcalling_it/screens/auth/verification_screen.dart';
+import 'package:bdcalling_it/screens/profile/edit_profile_screen.dart';
+import 'package:bdcalling_it/screens/profile/profile_screen.dart';
 import 'package:bdcalling_it/screens/splash/welcome_screen.dart';
+import 'package:bdcalling_it/screens/task/bottom_nav_screen.dart';
 import 'package:bdcalling_it/screens/task/task_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,9 +23,15 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => TaskListScreen());
       case RouteNames.verification:
         return MaterialPageRoute(
-          builder: (_) =>
-              OTPVerificationPage(email: settings.arguments as String),
-        );
+            builder: (_) =>
+                OTPVerificationPage(email: settings.arguments as String));
+
+      case RouteNames.editProfile:
+        return MaterialPageRoute(builder: (_) => EditProfileScreen());
+      case RouteNames.profile:
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case RouteNames.bottomNav:
+        return MaterialPageRoute(builder: (_) => BottomNavScreen());
       default:
         return MaterialPageRoute(builder: (_) => Error404Screen());
     }

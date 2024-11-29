@@ -18,8 +18,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       (event, emit) async {
         emit(TaskLoading());
         try {
-          final token = await authService.getToken();
-          final tasks = await taskService.fetchAllTasks(token!);
+          var token = await authService
+              .getToken(); //TODO: Add mail when API will be ready
+          token ??= "kdjfkdjfkdjfkd"; // dummpy token for check!
+
+          final tasks = await taskService.fetchAllTasks(token);
           emit(TaskLoaded(tasks));
         } catch (e) {
           emit(TaskError(e.toString()));

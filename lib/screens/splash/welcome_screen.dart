@@ -30,14 +30,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthAuthenticated) {
-            Navigator.pushReplacementNamed(context, RouteNames.tasklist);
+            Navigator.pushReplacementNamed(context, RouteNames.bottomNav);
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
             );
-            Navigator.pushReplacementNamed(context, RouteNames.login);
+            Navigator.pushReplacementNamed(context, RouteNames.bottomNav);
           } else {
-            Navigator.pushReplacementNamed(context, RouteNames.login);
+            Navigator.pushReplacementNamed(context,
+                RouteNames.bottomNav); //! TODO: Fix it leter when api is ready
           }
         },
         builder: (context, state) {
