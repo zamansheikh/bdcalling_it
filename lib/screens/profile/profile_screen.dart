@@ -1,4 +1,6 @@
+import 'package:bdcalling_it/core/dependency_injector.dart';
 import 'package:bdcalling_it/core/routes/route_names.dart';
+import 'package:bdcalling_it/screens/auth/auth_bloc/auth_bloc.dart';
 import 'package:bdcalling_it/screens/profile/profile_bloc/profile_bloc.dart';
 import 'package:bdcalling_it/services/api_service.dart';
 import 'package:flutter/material.dart';
@@ -126,6 +128,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             value: user.address,
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                  //logout button
+                  const SizedBox(height: 20),
+                  BlocListener<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthInitial) {
+                        Navigator.pushReplacementNamed(
+                            context, RouteNames.login);
+                      }
+                    },
+                    child: ElevatedButton(
+                      onPressed: () {
+                        sl<AuthBloc>().add(UserLoggedOut());
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: SizedBox(
+                        width: 200,
+                        child: Center(
+                          child: const Text(
+                            'Logout',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
                       ),
                     ),
                   ),

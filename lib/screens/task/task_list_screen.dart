@@ -33,12 +33,6 @@ class _TaskListScreenState extends State<TaskListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.logout),
-          onPressed: () {
-            context.read<AuthBloc>().add(UserLoggedOut());
-          },
-        ),
         title: const Text('Task List'),
         actions: [
           IconButton(
