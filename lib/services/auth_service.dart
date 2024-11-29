@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bdcalling_it/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_service.dart';
 
@@ -22,7 +23,6 @@ class AuthService {
         address: address,
         profileImage: profileImage,
       );
-
       return response;
     } catch (e) {
       return {
@@ -78,6 +78,16 @@ class AuthService {
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('user_token');
+  }
+  Future<UserModel?> getUser(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    try {
+      final response = await _apiService.getUser(token: token);
+      prefs.setString('user_email', response['data']['email']);
+      return UserModel.fromJson(response['data']);
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<void> logout() async {

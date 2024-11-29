@@ -16,11 +16,9 @@ class ApiService {
     required String address,
     File? profileImage,
   }) async {
-    var request = http.MultipartRequest(
-      'POST', 
-      Uri.parse('$baseUrl/user/register')
-    );
-    
+    var request =
+        http.MultipartRequest('POST', Uri.parse('$baseUrl/user/register'));
+
     request.fields['firstName'] = firstName;
     request.fields['lastName'] = lastName;
     request.fields['email'] = email;
@@ -30,16 +28,13 @@ class ApiService {
     if (profileImage != null) {
       var mimeType = lookupMimeType(profileImage.path);
       var multipartFile = await http.MultipartFile.fromPath(
-        'file', 
-        profileImage.path,
-        contentType: MediaType.parse(mimeType ?? 'image/jpeg')
-      );
+          'file', profileImage.path,
+          contentType: MediaType.parse(mimeType ?? 'image/jpeg'));
       request.files.add(multipartFile);
     }
 
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
-    
     return json.decode(response.body);
   }
 
@@ -55,6 +50,18 @@ class ApiService {
       }),
       headers: {
         'Content-Type': 'application/json',
+      },
+    );
+
+    return json.decode(response.body);
+  }
+
+  Future<Map<String, dynamic>> getUser({required String token}) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/user/my-profile'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
       },
     );
 

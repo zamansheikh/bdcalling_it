@@ -1,7 +1,9 @@
 import 'package:bdcalling_it/core/routes/route_names.dart';
 import 'package:bdcalling_it/screens/auth/login_screen.dart';
 import 'package:bdcalling_it/screens/auth/register_screen.dart';
+import 'package:bdcalling_it/screens/auth/verification_screen.dart';
 import 'package:bdcalling_it/screens/splash/welcome_screen.dart';
+import 'package:bdcalling_it/screens/task/task_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,6 +16,13 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case RouteNames.register:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
+      case RouteNames.tasklist:
+        return MaterialPageRoute(builder: (_) => TaskListScreen());
+      case RouteNames.verification:
+        return MaterialPageRoute(
+          builder: (_) =>
+              OTPVerificationPage(email: settings.arguments as String),
+        );
       default:
         return MaterialPageRoute(builder: (_) => Error404Screen());
     }
